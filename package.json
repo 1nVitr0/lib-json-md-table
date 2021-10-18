@@ -2,6 +2,10 @@
   "name": "json-md-table",
   "version": "1.0.0",
   "author": "Aram Becker",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/1nVitr0/lib-json-md-table.git"
+  },
   "module": "dist/json-md-table.esm.js",
   "license": "MIT",
   "main": "dist/index.js",
