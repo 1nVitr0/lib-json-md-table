@@ -1,8 +1,8 @@
 {
-  "name": "md-table",
+  "name": "json-md-table",
   "version": "1.0.0",
   "author": "Aram Becker",
-  "module": "dist/md-table.esm.js",
+  "module": "dist/json-md-table.esm.js",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
