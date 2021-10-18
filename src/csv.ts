@@ -24,7 +24,7 @@ export function jsonToCsv(data: ShallowJSON[], headers?: CSVHeader): CSV {
       // Add missing header fields to previous rows if row contains additional key(s)
       const missing: string[] = [];
       for (const key of keys) if (!usedHeaders.includes(key)) missing.push(key);
-      for (let i = 1; i < result.length; i++) missing.forEach(key => (result[i][key] = null));
+      for (let i = 1; i < result.length; i++) result[i].push(...missing.map(_ => null));
       usedHeaders.push(...missing);
     }
 

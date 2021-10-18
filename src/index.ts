@@ -5,11 +5,19 @@ function isData(data: any): data is ShallowJSON[] | CSV | string | CSVBody {
   return data instanceof Array || typeof data === 'string';
 }
 
-export default function generateMarkdownTable(data: ShallowJSON[], options?: MarkdownTableOptions);
-export default function generateMarkdownTable(data: CSV, options?: MarkdownTableOptions);
-export default function generateMarkdownTable(data: string, options?: MarkdownTableOptions);
-export default function generateMarkdownTable(headers: CSVHeader, data: CSVBody, options?: MarkdownTableOptions);
-export default function generateMarkdownTable(headers: CSVHeader, data: string, options?: MarkdownTableOptions);
+export default function generateMarkdownTable(data: ShallowJSON[], options?: MarkdownTableOptions | true): string;
+export default function generateMarkdownTable(data: CSV, options?: MarkdownTableOptions | true): string;
+export default function generateMarkdownTable(data: string, options?: MarkdownTableOptions | true): string;
+export default function generateMarkdownTable(
+  headers: CSVHeader,
+  data: CSVBody,
+  options?: MarkdownTableOptions | true
+): string;
+export default function generateMarkdownTable(
+  headers: CSVHeader,
+  data: string,
+  options?: MarkdownTableOptions | true
+): string;
 export default function generateMarkdownTable(
   dataOrHeaders: ShallowJSON[] | CSV | string | CSVHeader,
   dataOrOptions?: CSVBody | MarkdownTableOptions | string | true,
@@ -35,7 +43,7 @@ export default function generateMarkdownTable(
 }
 
 function generateTableFromCSV(csv: CSV, options?: MarkdownTableOptions | true): string {
-  options = options == true ? undefined : options;
+  options = options === true ? { pretty: true } : options;
   const table = csvToTable(csv, options);
 
   return options?.pretty ? prettyPrintTable(table) : printTable(table);

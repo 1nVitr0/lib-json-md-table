@@ -63,4 +63,16 @@ describe('test csv functions', () => {
       [4, null, 6],
     ]);
   });
+
+  test('adds missing values and set them to null', () => {
+    const json: ShallowJSON[] = [{ a: 1 }, { a: 2, c: 3 }, { a: 4, b: 5, c: 6 }];
+    const result = jsonToCsv(json);
+
+    expect(result).toStrictEqual([
+      ['a', 'c', 'b'],
+      [1, null, null],
+      [2, 3, null],
+      [4, 6, 5],
+    ]);
+  });
 });

@@ -84,7 +84,7 @@ function getColSize(rows: string[][]): number[] {
   return result;
 }
 
-function padColumn(column: string, length: number, alignment: TableAlignment = TableAlignment.left): string {
+function padColumn(column: string, length: number, alignment: TableAlignment): string {
   switch (alignment) {
     case TableAlignment.left:
       return column.padEnd(length, ' ');
