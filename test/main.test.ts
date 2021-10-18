@@ -1,6 +1,5 @@
-import generateMarkdownTable from '../src';
+import generateMarkdownTable, { MarkdownTableOptions } from '../src';
 import { ShallowJSON, CSV, CSVBody } from '../src/csv';
-import { TableAlignment } from '../src/md';
 
 describe('test exported library', () => {
   test('should generate table from json', () => {
@@ -52,7 +51,7 @@ describe('test exported library', () => {
     ];
     const result = generateMarkdownTable(json, {
       pretty: true,
-      alignment: [TableAlignment.left, TableAlignment.center, TableAlignment.right],
+      alignment: ['left', 'center', 'right'],
     });
     expect(result).toStrictEqual(
       '| a    |   b   |    c |\n| :--- | :---: | ---: |\n| 1    |   2   |    3 |\n| 4    |   5   |    6 |'
@@ -111,5 +110,23 @@ describe('test exported library', () => {
   test('should throw error on unsupported parameters', () => {
     expect(generateMarkdownTable.bind(['a', 'b', 'c'], {})).toThrowError();
     expect(generateMarkdownTable.bind({})).toThrowError();
+  });
+
+  test('should accept alignment strings', () => {
+    const csv = 'a,b,c\n1,2,3\n4,5,6';
+    const options: MarkdownTableOptions = { alignment: ['left', 'center', 'right'], pretty: true };
+    const md = generateMarkdownTable(csv, options);
+
+    expect(md).toStrictEqual(
+      '| a    |   b   |    c |\n| :--- | :---: | ---: |\n| 1    |   2   |    3 |\n| 4    |   5   |    6 |'
+    );
+  });
+
+  test('should exclude columns', () => {
+    const csv = 'a,b,c\n1,2,3\n4,5,6';
+    const options: MarkdownTableOptions = { exclude: ['b'] };
+    const md = generateMarkdownTable(csv, options);
+
+    expect(md).toStrictEqual('| a | c |\n| :---: | :---: |\n| 1 | 3 |\n| 4 | 6 |');
   });
 });

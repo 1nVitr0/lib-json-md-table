@@ -1,13 +1,16 @@
 import { ShallowJSON, CSV, CSVBody, CSVHeader, parseCsv, jsonToCsv, parseCsvBody } from './csv';
 import { csvToTable, MarkdownTableOptions, prettyPrintTable, printTable } from './md';
 
+export { MarkdownTableOptions } from './md';
+export { ShallowJSON, CSV, CSVBody, CSVHeader } from './csv';
+
 function isData(data: any): data is ShallowJSON[] | CSV | string | CSVBody {
   return data instanceof Array || typeof data === 'string';
 }
 
+export default function generateMarkdownTable(data: string, options?: MarkdownTableOptions | true): string;
 export default function generateMarkdownTable(data: ShallowJSON[], options?: MarkdownTableOptions | true): string;
 export default function generateMarkdownTable(data: CSV, options?: MarkdownTableOptions | true): string;
-export default function generateMarkdownTable(data: string, options?: MarkdownTableOptions | true): string;
 export default function generateMarkdownTable(
   headers: CSVHeader,
   data: CSVBody,

@@ -1,10 +1,6 @@
 import { CSV, CSVBody, CSVHeader } from './csv';
 
-export enum TableAlignment {
-  left = 'left',
-  right = 'right',
-  center = 'center',
-}
+export type TableAlignment = 'left' | 'right' | 'center';
 
 export interface MarkdownTable {
   headers: string[];
@@ -16,13 +12,13 @@ export interface MarkdownTableOptions {
   columns?: string[];
   exclude?: string[];
   pretty?: true;
-  alignment?: TableAlignment[] | TableAlignment;
+  alignment?: (TableAlignment & string)[] | (TableAlignment & string);
 }
 
 const DEFAULT_TABLE_OPTIONS: MarkdownTableOptions = {};
 
 export function csvToTable(csv: CSV, options: Omit<MarkdownTableOptions, 'pretty'> = {}): MarkdownTable {
-  const { columns, exclude, alignment: _alignment = TableAlignment.center } = options;
+  const { columns, exclude, alignment: _alignment = 'center' } = options;
   const data: CSV = [...csv];
   const dataHeaders = data.shift() as CSVHeader;
 
@@ -63,11 +59,11 @@ function getTableRows(table: MarkdownTable): [string[], string[], ...string[][]]
   const { headers, alignment, rows } = table;
   const separator = alignment.map(alignment => {
     switch (alignment) {
-      case TableAlignment.left:
+      case 'left':
         return ':---';
-      case TableAlignment.center:
+      case 'center':
         return ':---:';
-      case TableAlignment.right:
+      case 'right':
         return '---:';
     }
   });
@@ -86,12 +82,12 @@ function getColSize(rows: string[][]): number[] {
 
 function padColumn(column: string, length: number, alignment: TableAlignment): string {
   switch (alignment) {
-    case TableAlignment.left:
+    case 'left':
       return column.padEnd(length, ' ');
-    case TableAlignment.right:
-      return column.padStart(length, ' ');
-    case TableAlignment.center:
+    case 'center':
       const left = Math.ceil(length / 2);
       return column.padStart(left, ' ').padEnd(length, ' ');
+    case 'right':
+      return column.padStart(length, ' ');
   }
 }

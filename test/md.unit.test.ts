@@ -1,5 +1,5 @@
 import { CSV } from '../src/csv';
-import { csvToTable, MarkdownTable, prettyPrintTable, printTable, TableAlignment } from '../src/md';
+import { csvToTable, MarkdownTable, prettyPrintTable, printTable } from '../src/md';
 
 describe('test markdown functions', () => {
   test('should generate table descriptor', () => {
@@ -11,7 +11,7 @@ describe('test markdown functions', () => {
     const descriptor = csvToTable(csv);
 
     expect(descriptor).toStrictEqual({
-      alignment: [TableAlignment.center, TableAlignment.center, TableAlignment.center],
+      alignment: ['center', 'center', 'center'],
       headers: ['a', 'b', 'c'],
       rows: [
         ['1', '2', '3'],
@@ -26,10 +26,10 @@ describe('test markdown functions', () => {
       [1, 2, 3],
       [4, 5, 6],
     ];
-    const descriptor = csvToTable(csv, { alignment: TableAlignment.left });
+    const descriptor = csvToTable(csv, { alignment: 'left' });
 
     expect(descriptor).toStrictEqual({
-      alignment: [TableAlignment.left, TableAlignment.left, TableAlignment.left],
+      alignment: ['left', 'left', 'left'],
       headers: ['a', 'b', 'c'],
       rows: [
         ['1', '2', '3'],
@@ -45,11 +45,11 @@ describe('test markdown functions', () => {
       [4, 5, 6],
     ];
     const descriptor = csvToTable(csv, {
-      alignment: [TableAlignment.left, TableAlignment.center, TableAlignment.right],
+      alignment: ['left', 'center', 'right'],
     });
 
     expect(descriptor).toStrictEqual({
-      alignment: [TableAlignment.left, TableAlignment.center, TableAlignment.right],
+      alignment: ['left', 'center', 'right'],
       headers: ['a', 'b', 'c'],
       rows: [
         ['1', '2', '3'],
@@ -60,7 +60,7 @@ describe('test markdown functions', () => {
 
   test('should print markdown table', () => {
     const table: MarkdownTable = {
-      alignment: [TableAlignment.left, TableAlignment.center, TableAlignment.right],
+      alignment: ['left', 'center', 'right'],
       headers: ['a', 'b', 'c'],
       rows: [
         ['1', '2', '3'],
@@ -74,7 +74,7 @@ describe('test markdown functions', () => {
 
   test('should pretty print markdown table', () => {
     const table: MarkdownTable = {
-      alignment: [TableAlignment.left, TableAlignment.center, TableAlignment.right],
+      alignment: ['left', 'center', 'right'],
       headers: ['a', 'b', 'c'],
       rows: [
         ['1', '2', '3'],
