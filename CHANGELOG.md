@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/1nVitr0/lib-json-md-table/compare/v1.1.4...v1.1.5) (2021-10-19)
+
+
+### Bug Fixes
+
+* update README and keywords ([aa85c37](https://github.com/1nVitr0/lib-json-md-table/commit/aa85c376f9af9bd85ae3216ca5e6bc37095e290c))
+
 ## [1.1.4](https://github.com/1nVitr0/lib-json-md-table/compare/v1.1.3...v1.1.4) (2021-10-19)
 
 
