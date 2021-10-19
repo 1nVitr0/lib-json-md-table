@@ -36,6 +36,20 @@ describe('test csv functions', () => {
     ]);
   });
 
+  test('should convert json with mixed types', () => {
+    const json: ShallowJSON[] = [
+      { a: true, b: false, c: null },
+      { a: undefined, b: 1, c: '2' },
+    ];
+    const result = jsonToCsv(json);
+
+    expect(result).toStrictEqual([
+      ['a', 'b', 'c'],
+      [true, false, null],
+      [null, 1, '2'],
+    ]);
+  });
+
   test('should convert json and respect headers', () => {
     const json: ShallowJSON[] = [
       { a: 1, b: 2, c: 3 },
