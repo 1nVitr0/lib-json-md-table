@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/1nVitr0/lib-json-md-table/compare/v1.1.1...v1.1.2) (2021-10-19)
+
+
+### Bug Fixes
+
+* fix errror on null column ([cc9c213](https://github.com/1nVitr0/lib-json-md-table/commit/cc9c21310d598518a54c3f79f1a6a062e077f668))
+
 ## [1.1.1](https://github.com/1nVitr0/lib-json-md-table/compare/v1.1.0...v1.1.1) (2021-10-18)
 
 
