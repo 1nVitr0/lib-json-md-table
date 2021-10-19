@@ -32,7 +32,7 @@ export function csvToTable(csv: CSV, options: Omit<MarkdownTableOptions, 'pretty
   const alignment = _alignment instanceof Array ? _alignment : headers.map(_ => _alignment);
   const rows: string[][] =
     !exclude && !columns
-      ? data.map((row: (string | number | boolean)[]) => row.map(col => col.toString()))
+      ? data.map((row: (string | number | boolean)[]) => row.map(col => col?.toString()))
       : data.map((row: (string | number | boolean)[]) => headerIndexes.map(i => row[i]?.toString() || null));
 
   return { headers, alignment, rows };
