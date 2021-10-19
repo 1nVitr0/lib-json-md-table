@@ -28,7 +28,7 @@ export function jsonToCsv(data: ShallowJSON[], headers?: CSVHeader): CSV {
       usedHeaders.push(...missing);
     }
 
-    result.push(usedHeaders.map(header => jsonRow[header] || null));
+    result.push(usedHeaders.map(header => jsonRow[header] ?? null));
   }
 
   return result;
