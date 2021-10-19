@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/1nVitr0/lib-json-md-table/compare/v1.1.2...v1.1.3) (2021-10-19)
+
+
+### Bug Fixes
+
+* correctly display boolean and null values ([d1df1e4](https://github.com/1nVitr0/lib-json-md-table/commit/d1df1e4f86437ae25861d12ceb8a99bdb9cbc72d))
+
 ## [1.1.2](https://github.com/1nVitr0/lib-json-md-table/compare/v1.1.1...v1.1.2) (2021-10-19)
 
 
