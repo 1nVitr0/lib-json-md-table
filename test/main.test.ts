@@ -98,7 +98,7 @@ describe('test exported library', () => {
     expect(result).toStrictEqual('| a | c | d |\n| :---: | :---: | :---: |\n| 1 | 3 |  |\n| 4 | 6 |  |');
   });
 
-  test('should respect incexcludelude columns', () => {
+  test('should respect exclude columns', () => {
     const json: ShallowJSON[] = [
       { a: 1, b: 2, c: 3 },
       { a: 4, b: 5, c: 6 },
@@ -128,5 +128,42 @@ describe('test exported library', () => {
     const md = generateMarkdownTable(csv, options);
 
     expect(md).toStrictEqual('| a | c |\n| :---: | :---: |\n| 1 | 3 |\n| 4 | 6 |');
+  });
+
+  test('should work with boolean values', () => {
+    const csv: CSV = [
+      ['a', 'b'],
+      [true, false],
+    ];
+    const result = generateMarkdownTable(csv);
+    expect(result).toStrictEqual('| a | b |\n| :---: | :---: |\n| true | false |');
+  });
+
+  test('should work with numbers', () => {
+    const csv: CSV = [
+      ['a', 'b'],
+      [1, 2],
+    ];
+    const result = generateMarkdownTable(csv);
+    expect(result).toStrictEqual('| a | b |\n| :---: | :---: |\n| 1 | 2 |');
+  });
+
+  test('should work with null and undefined', () => {
+    const csv: CSV = [
+      ['a', 'b'],
+      [null, undefined],
+    ];
+    const result = generateMarkdownTable(csv);
+    expect(result).toStrictEqual('| a | b |\n| :---: | :---: |\n|  |  |');
+  });
+
+  test('should work with mixed types', () => {
+    const csv: CSV = [
+      ['a', 'b', 'c'],
+      [true, false, null],
+      [undefined, 1, ''],
+    ];
+    const result = generateMarkdownTable(csv);
+    expect(result).toStrictEqual('| a | b | c |\n| :---: | :---: | :---: |\n| true | false |  |\n|  | 1 |  |');
   });
 });

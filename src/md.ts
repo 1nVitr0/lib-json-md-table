@@ -32,8 +32,8 @@ export function csvToTable(csv: CSV, options: Omit<MarkdownTableOptions, 'pretty
   const alignment = _alignment instanceof Array ? _alignment : headers.map(_ => _alignment);
   const rows: string[][] =
     !exclude && !columns
-      ? data.map((row: (string | number | boolean)[]) => row.map(col => col?.toString()))
-      : data.map((row: (string | number | boolean)[]) => headerIndexes.map(i => row[i]?.toString() || null));
+      ? data.map((row: (string | number | boolean)[]) => row.map(col => stringify(col)))
+      : data.map((row: (string | number | boolean)[]) => headerIndexes.map(i => stringify(row[i])));
 
   return { headers, alignment, rows };
 }
@@ -90,4 +90,10 @@ function padColumn(column: string, length: number, alignment: TableAlignment): s
     case 'right':
       return column.padStart(length, ' ');
   }
+}
+
+function stringify(value: any): string {
+  if (value === null || value === undefined) return '';
+  else if (typeof value == 'string') return value;
+  return JSON.stringify(value);
 }
