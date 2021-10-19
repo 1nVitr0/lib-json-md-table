@@ -39,11 +39,12 @@ npm i --save json-md-table
 
 ### Examples
 
-> ```js
-> generateMarkdownTable([{ a: 1, b: 2, c: 3 }, { a: 4, b: 5, c: 6 }], true)
-> generateMarkdownTable([['a', 'b', 'c'], [1, 2, 3], [4, 5, 6]], true);
-> generateMarkdownTable('a,b,c\n1,2,3\n4,5,6', true);
-> ```
+```js
+import generateMarkdownTable from 'json-md-table';
+generateMarkdownTable([{ a: 1, b: 2, c: 3 }, { a: 4, b: 5, c: 6 }]);
+generateMarkdownTable([['a', 'b', 'c'], [1, 2, 3], [4, 5, 6]]);
+generateMarkdownTable('a,b,c\n1,2,3\n4,5,6');
+```
 
 > ```md
 > |   a   |   b   |   c   |
@@ -54,19 +55,19 @@ npm i --save json-md-table
 
 #### Custom headers
 
-> ```js
-> generateMarkdownTable(['d', 'e', 'f'], [[1, 2, 3], [4, 5, 6]]);
-> generateMarkdownTable(['d', 'e', 'f'], '1,2,3\n4,5,6');
-> ```
+```js
+generateMarkdownTable(['d', 'e', 'f'], [[1, 2, 3], [4, 5, 6]]);
+generateMarkdownTable(['d', 'e', 'f'], '1,2,3\n4,5,6');
+```
 
 #### Options
 
-> ```js
-> generateMarkdownTable(    
->   'a,b,c\n1,2,3\n4,5,6',  
->   { exclude: 'b', alignment: ['left', 'right'], pretty: true }
-> );
-> ```
+```js
+generateMarkdownTable(    
+  'a,b,c\n1,2,3\n4,5,6',  
+  { exclude: 'b', alignment: ['left', 'right'], pretty: true }
+);
+```
 
 > ```md
 > | a    |    c |
@@ -75,18 +76,18 @@ npm i --save json-md-table
 > | 4    |    6 |
 > ```
 
-> ```ts
-> // Complete option list
-> 
-> interface MarkdownTableOptions {
->   columns?: string[];
->   exclude?: string[];
->   pretty?: true;
->   alignment?: 
->     | ('left' | 'center' | 'right')[]
->     | ('left' | 'center' | 'right');
-> }
-> ```
+```ts
+// Complete option list
+
+interface MarkdownTableOptions {
+  columns?: string[];
+  exclude?: string[];
+  pretty?: true;
+  alignment?: 
+    | ('left' | 'center' | 'right')[]
+    | ('left' | 'center' | 'right');
+}
+```
 
 ### Authors or Acknowledgments
 
