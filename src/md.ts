@@ -61,21 +61,13 @@ export function printTable(table: MarkdownTable): string {
 }
 
 export function prettyPrintTable(table: MarkdownTable): string {
-  const { margin, minWidth } = table;
   const rows = getTableRows(table);
-  const colSizes = getColSize(rows).map((size, i) => Math.max(size, minWidth[i]));
-  const padding = margin.map(({ left, right }) => ({ left: ' '.repeat(left), right: ' '.repeat(right) }));
-  const overfill = margin.map(({ left, right }) => left + right);
+  const colSizes = getColSize(rows).map((size, i) => Math.max(size, table.minWidth[i]));
+  const overfill = table.margin.map(({ left, right }) => left + right);
 
-  const headers = rows
-    .shift()
-    .map((col, i) => `${padding[i].left}${padColumn(col, colSizes[i], table.alignment[i])}${padding[i].right}`);
-  const separator = rows
-    .shift()
-    .map((col, i) => col.replace('---', '-'.repeat(colSizes[i] - (col.length - 3) + overfill[i])));
-  const body = rows.map(row =>
-    row.map((col, i) => `${padding[i].left}${padColumn(col, colSizes[i], table.alignment[i])}${padding[i].right}`)
-  );
+  const headers = rows.shift().map(mapColumnPadding(colSizes, table));
+  const separator = rows.shift().map(mapPadSeparator(colSizes, overfill));
+  const body = rows.map(row => row.map(mapColumnPadding(colSizes, table)));
 
   return [headers, separator, ...body].map(row => `| ${row.join(' | ')} |`).join('\n');
 }
@@ -105,16 +97,26 @@ function getColSize(rows: string[][]): number[] {
   return result;
 }
 
-function padColumn(column: string, length: number, alignment: TableAlignment): string {
+function padColumn(column: string, length: number, alignment: TableAlignment, margin: TableMargin): string {
+  const leftPadding = ' '.repeat(margin.left);
+  const rightPadding = ' '.repeat(margin.right);
   switch (alignment) {
     case 'left':
-      return column.padEnd(length, ' ');
+      return leftPadding + column.padEnd(length, ' ') + rightPadding;
     case 'center':
       const right = column.length + Math.ceil((length - column.length) / 2);
       column = column.padEnd(right, ' ');
     case 'right':
-      return column.padStart(length, ' ');
+      return leftPadding + column.padStart(length, ' ') + rightPadding;
   }
+}
+
+function mapColumnPadding(sizes: number[], { alignment, margin }: MarkdownTable) {
+  return (col: string, i: number) => padColumn(col, sizes[i], alignment[i], margin[i]);
+}
+
+function mapPadSeparator(sizes: number[], overfill: number[]) {
+  return (col: string, i: number) => col.replace('---', '-'.repeat(sizes[i] + overfill[i] + 3 - col.length));
 }
 
 function stringify(value: any): string {
