@@ -166,4 +166,16 @@ describe('test exported library', () => {
     const result = generateMarkdownTable(csv);
     expect(result).toStrictEqual('| a | b | c |\n| :--- | :--- | :--- |\n| true | false |  |\n|  | 1 |  |');
   });
+
+  test('should respect margin and minWidth options', () => {
+    const csv = 'a,b,c\n1,2,3\n4,5,6';
+    const result = generateMarkdownTable(csv, {
+      margin: [0, { left: 1, right: 2 }, 3],
+      minWidth: [10, 12, 0],
+      pretty: true,
+    });
+    expect(result).toStrictEqual(
+      '| a          |  b              |    c       |\n| :--------- | :-------------- | :--------- |\n| 1          |  2              |    3       |\n| 4          |  5              |    6       |'
+    );
+  });
 });
