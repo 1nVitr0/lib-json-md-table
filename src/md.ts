@@ -14,12 +14,37 @@ export interface MarkdownTable {
   margin: TableMargin[];
 }
 
+/**
+ * Markdown table generation options
+ */
 export interface MarkdownTableOptions {
+  /**
+   * Column headers to select form data, if omitted all headers are chosen
+   */
   columns?: string[];
+  /**
+   * List of column headers to exclude (takes precedence over `columns`)
+   */
   exclude?: string[];
+  /**
+   * Pretty print table
+   */
   pretty?: true;
+  /**
+   * Column alignment, can be specified per-column or for all columns
+   * Has no effect if pretty !== true
+   */
   alignment?: (TableAlignment & string)[] | (TableAlignment & string);
+  /**
+   * Minimum width of columns, can be specified per-column or for all columns
+   * Has no effect if pretty !== true
+   */
   minWidth?: number | number[];
+  /**
+   * Column margins, can be specified per-column or for all columns
+   * If specified as a number, left and right margins will be set to it
+   * Has no effect if pretty !== true
+   */
   margin?: (TableMargin | number)[] | (TableMargin | number);
 }
 
