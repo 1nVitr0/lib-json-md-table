@@ -5,10 +5,11 @@
 
 ***
 
-![npm](https://img.shields.io/npm/v/json-md-table)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/1nVitr0/lib-json-md-table/Build,%20lint,%20and%20test?label=tests)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/1nVitr0/lib-json-md-table/Release%20new%20version)
-![nycrc config on GitHub](https://img.shields.io/nycrc/1nVitr0/lib-json-md-table?config=.nycrc.json)
+[![npm](https://img.shields.io/npm/v/json-md-table)](https://www.npmjs.com/package/json-md-table)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/json-md-table)](https://www.npmjs.com/package/json-md-table)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/1nVitr0/lib-json-md-table/Build,%20lint,%20and%20test?label=tests)](https://github.com/1nVitr0/lib-json-md-table/actions/workflows/main.yml)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/1nVitr0/lib-json-md-table/Release%20new%20version)](https://github.com/1nVitr0/lib-json-md-table/actions/workflows/release.yml)
+[![nycrc config on GitHub](https://img.shields.io/nycrc/1nVitr0/lib-json-md-table?config=.nycrc.json)](https://github.com/1nVitr0/lib-json-md-table/blob/main/.nycrc.json)
 
 <h3>Content</h3>
 
@@ -67,6 +68,9 @@ generateMarkdownTable(
   'a,b,c\n1,2,3\n4,5,6',  
   { exclude: 'b', alignment: ['left', 'right'], pretty: true }
 );
+
+// Shorthand for `{ pretty: true }`
+generateMarkdownTable('a,b,c\n1,2,3\n4,5,6', true);
 ```
 
 > ```md
@@ -86,6 +90,10 @@ interface MarkdownTableOptions {
   alignment?: 
     | ('left' | 'center' | 'right')[]
     | ('left' | 'center' | 'right');
+  minWidth?: number | number[];
+  margin?:
+    | ({ left: number; right: number } | number)[]
+    | ({ left: number; right: number } | number);
 }
 ```
 
