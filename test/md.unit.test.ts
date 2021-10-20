@@ -11,7 +11,7 @@ describe('test markdown functions', () => {
     const descriptor = csvToTable(csv);
 
     expect(descriptor).toStrictEqual({
-      alignment: ['center', 'center', 'center'],
+      alignment: ['left', 'left', 'left'],
       headers: ['a', 'b', 'c'],
       rows: [
         ['1', '2', '3'],
@@ -85,6 +85,22 @@ describe('test markdown functions', () => {
 
     expect(md).toStrictEqual(
       '| a    |   b   |    c |\n| :--- | :---: | ---: |\n| 1    |   2   |    3 |\n| 4    |   5   |    6 |'
+    );
+  });
+
+  test('should align odd centered rows left', () => {
+    const table: MarkdownTable = {
+      alignment: ['center', 'center'],
+      headers: ['aaaaaaaaaaaaaaa', 'bbbbbbbbbbbbbbb'],
+      rows: [
+        ['aaaa', 'bbbbb'],
+        ['ccccc', 'dddd'],
+      ],
+    };
+    const md = prettyPrintTable(table);
+
+    expect(md).toStrictEqual(
+      '| aaaaaaaaaaaaaaa | bbbbbbbbbbbbbbb |\n| :-------------: | :-------------: |\n|      aaaa       |      bbbbb      |\n|      ccccc      |      dddd       |'
     );
   });
 });

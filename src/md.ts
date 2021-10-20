@@ -18,7 +18,7 @@ export interface MarkdownTableOptions {
 const DEFAULT_TABLE_OPTIONS: MarkdownTableOptions = {};
 
 export function csvToTable(csv: CSV, options: Omit<MarkdownTableOptions, 'pretty'> = {}): MarkdownTable {
-  const { columns, exclude, alignment: _alignment = 'center' } = options;
+  const { columns, exclude, alignment: _alignment = 'left' } = options;
   const data: CSV = [...csv];
   const dataHeaders = data.shift() as CSVHeader;
 
@@ -85,8 +85,8 @@ function padColumn(column: string, length: number, alignment: TableAlignment): s
     case 'left':
       return column.padEnd(length, ' ');
     case 'center':
-      const left = Math.ceil(length / 2);
-      return column.padStart(left, ' ').padEnd(length, ' ');
+      const right = column.length + Math.ceil((length - column.length) / 2);
+      column = column.padEnd(right, ' ');
     case 'right':
       return column.padStart(length, ' ');
   }
