@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/1nVitr0/lib-json-md-table/compare/v1.1.5...v1.2.0) (2021-10-20)
+
+
+### Bug Fixes
+
+* make left default alignment ([06567e4](https://github.com/1nVitr0/lib-json-md-table/commit/06567e4cd0245a39acf029bc49b90dc07cc5f325))
+
+
+### Features
+
+* add support for margins and min width ([524014a](https://github.com/1nVitr0/lib-json-md-table/commit/524014ae3669fc27861d5eb02ac16afded1eacf8))
+
 ## [1.1.5](https://github.com/1nVitr0/lib-json-md-table/compare/v1.1.4...v1.1.5) (2021-10-19)
 
 
